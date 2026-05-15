@@ -12,7 +12,7 @@ public class ZonaFitForma extends JFrame{
     private JPanel panelPrincipal;
     IClienteServicio clienteServicio;
 
-    @Autowired
+    @Autowired//por cierto este tiene esto para añadirlo al paquete de spring   
     public ZonaFitForma(ClienteServicio clienteServicio){
         this.clienteServicio = clienteServicio;
         iniciarForma();
