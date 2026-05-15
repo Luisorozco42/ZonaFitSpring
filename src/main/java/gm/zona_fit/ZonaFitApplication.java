@@ -2,19 +2,19 @@ package gm.zona_fit;
 
 import gm.zona_fit.model.Cliente;
 import gm.zona_fit.service.IClienteServicio;
-import org.hibernate.boot.models.xml.internal.UserTypeCases;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.yaml.snakeyaml.emitter.ScalarAnalysis;
 
 import java.util.List;
 import java.util.Scanner;
 
-@SpringBootApplication
+//Se desactivo para poder crear la version de swing
+//Segun yo no es necesario ya que podemos reemplazar el codigo, pero supongo que se hace para no perder esta otra app
+//@SpringBootApplication
 public class ZonaFitApplication implements CommandLineRunner {
 
 	@Autowired
@@ -22,7 +22,7 @@ public class ZonaFitApplication implements CommandLineRunner {
 
 	private static final Logger logger = LoggerFactory.getLogger(ZonaFitApplication.class);
 
-	public static void main(String[] args) {
+	static void main(String[] args) {
 
 		logger.info("Iniciando la aplicacion");
 		//levantar la fabrica de spring
