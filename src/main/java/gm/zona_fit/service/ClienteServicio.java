@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CienteServicio implements IClienteServicio{
+public class ClienteServicio implements IClienteServicio{
 
     @Autowired //De esta manera inyectamos el cliente repositorio para estar obteniendo data de la bd
     private ClienteRepositorio clienteRepositorio;
