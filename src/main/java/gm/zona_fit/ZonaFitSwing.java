@@ -14,6 +14,7 @@ public class ZonaFitSwing {
     static void main(String[] args) {
         //configuramos el modo oscuro
         FlatDarculaLaf.setup();
+
         //Instancia la fabrica de spring
         ConfigurableApplicationContext contextoSpring =
                 new SpringApplicationBuilder(ZonaFitSwing.class)
