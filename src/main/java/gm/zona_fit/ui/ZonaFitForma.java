@@ -8,9 +8,7 @@ import gm.zona_fit.service.ClienteServicio;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 @Component
 public class ZonaFitForma extends JFrame{
@@ -40,6 +38,8 @@ public class ZonaFitForma extends JFrame{
                 cargarClienteSeleccionado();
             }
         });
+        limpiarButton.addActionListener(e -> limpiarFormulario());
+        eliminarButton.addActionListener(e -> eliminarCliente());
     }
 
     private void iniciarForma() {
@@ -115,6 +115,21 @@ public class ZonaFitForma extends JFrame{
             nombreTexto.setText(nombre);
             apellidoTexto.setText(apellido);
             membresiaTexto.setText(membresia);
+        }
+    }
+
+    private void eliminarCliente() {
+        var renglon = clientesTabla.getSelectedRow();
+        if (renglon != -1) {
+            var id = Integer.parseInt(clientesTabla.getModel().getValueAt(renglon, 0).toString());
+            this.idCliente = id;
+            Cliente cliente = new Cliente();
+            cliente.setId(idCliente);
+
+            clienteServicio.eliminarCliente(cliente);
+            mostrarMensaje("Se elimino el cliente con el id " + idCliente);
+            limpiarFormulario();
+            listarClientes();
         }
     }
 

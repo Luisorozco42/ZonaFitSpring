@@ -1,4 +1,4 @@
-package gm.zona_fit;
+    package gm.zona_fit;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import gm.zona_fit.ui.ZonaFitForma;
