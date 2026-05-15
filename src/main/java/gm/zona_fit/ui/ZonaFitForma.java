@@ -8,6 +8,9 @@ import gm.zona_fit.service.ClienteServicio;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 @Component
 public class ZonaFitForma extends JFrame{
@@ -21,12 +24,22 @@ public class ZonaFitForma extends JFrame{
     private JButton limpiarButton;
     IClienteServicio clienteServicio;
     private DefaultTableModel tablaModeloClientes;
+    Integer idCliente;
 
     @Autowired//por cierto este tiene esto para añadirlo al paquete de spring
     public ZonaFitForma(ClienteServicio clienteServicio){
         this.clienteServicio = clienteServicio;
         iniciarForma();
         guardarBoton.addActionListener(e -> guardarCliente());
+        clientesTabla.addComponentListener(new ComponentAdapter() {
+        });
+        clientesTabla.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                cargarClienteSeleccionado();
+            }
+        });
     }
 
     private void iniciarForma() {
@@ -77,19 +90,41 @@ public class ZonaFitForma extends JFrame{
         var membresia = Integer.parseInt(membresiaTexto.getText());
         Cliente cliente = new Cliente();
 
+        cliente.setId(this.idCliente);
         cliente.setNombre(nombre);
         cliente.setApellido(apellido);
         cliente.setMembresia(membresia);
 
         this.clienteServicio.guardarCliente(cliente);//inserta
+        if(this.idCliente == null) mostrarMensaje("Se agrego el nuevo cliente");
+        else mostrarMensaje("Se actualizo el cliente");
+
         limpiarFormulario();
         listarClientes();
     }
 
+    private void cargarClienteSeleccionado() {
+        var renglon = clientesTabla.getSelectedRow();
+        if (renglon != -1) { //-1 significa que ningun registro ha sido seleccionado
+            var id = Integer.parseInt(clientesTabla.getModel().getValueAt(renglon, 0).toString());
+            var nombre = clientesTabla.getModel().getValueAt(renglon, 1).toString();
+            var apellido = clientesTabla.getModel().getValueAt(renglon, 2).toString();
+            var membresia = clientesTabla.getModel().getValueAt(renglon, 3).toString();
+
+            this.idCliente = id;
+            nombreTexto.setText(nombre);
+            apellidoTexto.setText(apellido);
+            membresiaTexto.setText(membresia);
+        }
+    }
+
     private void limpiarFormulario() {
+        this.idCliente = null;
         nombreTexto.setText("");
         apellidoTexto.setText("");
         membresiaTexto.setText("");
+        //deseleleccionamos algun elemento de la tabla
+        this.clientesTabla.getSelectionModel().clearSelection();
     }
 
     private void mostrarMensaje(String mensaje) {
