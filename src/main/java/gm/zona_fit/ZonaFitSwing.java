@@ -9,7 +9,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import javax.swing.*;
 
-@SpringBootApplication // ahora es la nueva clase principal
+//@SpringBootApplication // ahora es la nueva clase principal, actualizacion, ya no lo es xd
 public class ZonaFitSwing {
     static void main(String[] args) {
         //configuramos el modo oscuro
