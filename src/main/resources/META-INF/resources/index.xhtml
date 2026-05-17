@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- Por fin esta parte de los xmlns no dan error visual, creo que necesitaba los plugins en un punto pero varias
 cosas en el pom eran necesarias para hacerlo funcionar tambien. Cabe a destacar que esto esta actualizado no como
 en el curso que es solo java 21 con versiones mas viejas de todas las tecnologias que estoy usando aqui-->
@@ -10,12 +11,20 @@ en el curso que es solo java 21 con versiones mas viejas de todas las tecnologia
       xmlns:f="jakarta.faces.core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:pe="http://primefaces.org/ui/extensions">
-    
-    <f:view contentType="text/html">
-        <h:head>
-            <title>Zona Fit (GYM)</title>
-            <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css"/>
-        </h:head>
-    </f:view>
 
+<f:view contentType="text/html">
+    <h:head>
+        <title>Zona Fit (GYM)</title>
+        <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css"/>
+    </h:head>
+    <h:body>
+        <div class="flex justify-content-center flex-wrap card-container yellow-container">
+            <div class="flex align-items-center justify-content-center w-20rem h-4rem bg-yellow-500 font-bold
+            text-gray-900 border-round m-2">
+                <h3>(Zona Fit GYM)</h3>
+            </div>
+        </div>
+    </h:body>
+
+</f:view>
 </html>
