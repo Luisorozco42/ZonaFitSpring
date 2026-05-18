@@ -68,8 +68,9 @@ en el curso que es solo java 21 con versiones mas viejas de todas las tecnologia
                                     <p:resetInput target=":forma-modal:cliente-ventana"/>
                                 </p:commandButton>
 
-                                <p:commandButton value="Eliminar" icon="pi pi-trash">
-                                    <f:setPropertyActionListener target=":forma-cliente:clientes-tabla" value="1"/>
+                                <p:commandButton value="Eliminar" icon="pi pi-trash" class="ui-button-danger"
+                                process="@this" oncomplete="PF('eliminarClienteVentana').show()">
+                                    <f:setPropertyActionListener target="#{indexControlador.clienteSeleccionado}" value="#{cliente}"/>
                                 </p:commandButton>
                             </p:column>
 
@@ -108,6 +109,15 @@ en el curso que es solo java 21 con versiones mas viejas de todas las tecnologia
 
                     </f:facet>
                 </p:dialog>
+                <p:confirmDialog widgetVar="eliminarClienteVentana" showEffect="fade" width="300" message="Eliminar el cliente?"
+                                 header="Confirmar" severity="warn">
+
+                    <p:commandButton value="Si" icon="pi pi-check" actionListener="#{indexControlador.eliminarCliente()}"
+                                     process="@this" oncomplete="PF('eliminarClienteVentana').hide()"/>
+
+                    <p:commandButton value="No" icon="pi pi-times" type="button" styleClass="ui-button-secondary"
+                                     onclick="PF('eliminarClienteVentana').hide()"/>
+                </p:confirmDialog>
             </h:form>
         </div>
     </h:body>
