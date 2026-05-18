@@ -59,6 +59,20 @@ en el curso que es solo java 21 con versiones mas viejas de todas las tecnologia
                             <p:column headerText="Membresia">
                                 <h:outputText value="#{cliente.membresia}"/>
                             </p:column>
+
+                            <p:column headerText="Acciones">
+                                <p:commandButton value="Editar" icon="pi pi-pencil" update=":forma-modal:cliente-ventana"
+                                process="@this" oncomplete="PF('ventanaModalCliente').show()" class="ui-button-primary"
+                                style="margin-right: .5rem">
+                                    <f:setPropertyActionListener target="#{indexControlador.clienteSeleccionado}" value="#{cliente}"/>
+                                    <p:resetInput target=":forma-modal:cliente-ventana"/>
+                                </p:commandButton>
+
+                                <p:commandButton value="Eliminar" icon="pi pi-trash">
+                                    <f:setPropertyActionListener target=":forma-cliente:clientes-tabla" value="1"/>
+                                </p:commandButton>
+                            </p:column>
+
                         </p:dataTable>
                     </div>
                 </div>
@@ -91,6 +105,7 @@ en el curso que es solo java 21 con versiones mas viejas de todas las tecnologia
                         actionListener="#{indexControlador.guardarCliente()}"/>
                         <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('ventanaModalCliente').hide()"
                                          class="ui-button-secondary" type="button"/>
+
                     </f:facet>
                 </p:dialog>
             </h:form>

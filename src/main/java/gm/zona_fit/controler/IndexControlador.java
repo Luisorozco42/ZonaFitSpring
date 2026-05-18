@@ -26,8 +26,8 @@ public class IndexControlador {
     private static final Logger logger = LoggerFactory.getLogger(IndexControlador.class);
     private Cliente clienteSeleccionado;
 
-    //El constructor vacio lo manda a llamar por default jsf
-    //Este metodo es despues de que es llamado
+    //El constructor vacío lo manda a llamar por default jsf
+    //Este método es después de que es llamado
     @PostConstruct
     public void init(){
         cargarDatos();
@@ -43,18 +43,22 @@ public class IndexControlador {
     }
 
     public void guardarCliente() {
-        logger.info("Cliente a guardar: " + this.clienteSeleccionado);
         //Agregar
         if (this.clienteSeleccionado.getId() == null) {
             this.clienteServicio.guardarCliente(this.clienteSeleccionado);
             this.clientes.add(this.clienteSeleccionado);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cliente Agregado"));
-            //Ocultar la ventana modal
-            PrimeFaces.current().executeScript("PF('ventanaModalCliente').hide()");
-            //Actualizar la ventana usando ajax
-            PrimeFaces.current().ajax().update("forma-clientes:mensajes", "forma-clientes:clientes-tabla");
-            //reset del objeto cliente seleccionado
-            this.clienteSeleccionado = null;
         }
+        //Caso de modificar
+        else{
+            this.clienteServicio.guardarCliente(this.clienteSeleccionado);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cliente Actualizado"));
+        }
+        //Ocultar la ventana modal
+        PrimeFaces.current().executeScript("PF('ventanaModalCliente').hide()");
+        //Actualizar la ventana usando ajax
+        PrimeFaces.current().ajax().update("forma-clientes:mensajes", "forma-clientes:clientes-tabla");
+        //reset del objeto cliente seleccionado
+        this.clienteSeleccionado = null;
     }
 }
